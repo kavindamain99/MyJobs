@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     required: [true, "please Enter password"],
     minlength: [4, "must be least 4 characters"],
   },
+  role: {
+    type: "boolean",
+    default: false,
+  },
 });
 
 //hashing password using acessing the mongoose cretae middleware
