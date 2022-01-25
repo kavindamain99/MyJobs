@@ -9,7 +9,6 @@ const auth = async (req, res, next) => {
     res.send("Authentication invalid");
   } else {
     console.log(authHeader);
-    next();
   }
 
   const token = authHeader.split(" ")[1];
@@ -18,12 +17,11 @@ const auth = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     // attach the user to the job routes
     req.user = { userId: payload.userId };
-
-    console.log(req.user);
-    next();
+    req.userLogged = await User.findById(payload.userId).select("-password");
   } catch (error) {
     res.send("Authentication invalid user");
   }
+  next();
 };
 
 module.exports = auth;
