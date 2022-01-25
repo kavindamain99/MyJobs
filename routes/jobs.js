@@ -3,15 +3,15 @@ const router = express.Router();
 const authenticate = require("../middleware/auth");
 
 const {
-  getAllJobs,
-  getJobs,
+  getjobs,
+  getjob,
   createjob,
   updatejob,
   deletejob,
 } = require("../controllers/jobs");
 
-router.get("/getAlljobs", authenticate, getAllJobs);
-router.get("/getJobs", getJobs);
+router.get("/getjobs", authenticate, getjobs);
+router.get("/getjob/:id", getjob);
 router.post("/createjob", authenticate, createjob);
 
 router.patch("/updatejob/:id", updatejob);
