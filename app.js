@@ -10,12 +10,18 @@ app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
 
+//file uploads
+const fileUpload = require("express-fileupload");
+app.use(fileUpload());
+app.use(express.static("./public"));
+
 //routers
 const authRouter = require("./routes/auth");
 const jobRouter = require("./routes/jobs");
+const candidateRouter = require("./routes/candidate");
 app.use("/api/auth", authRouter);
 app.use("/api/jobs", jobRouter);
-
+app.use("/api/candidate", candidateRouter);
 //connect with mongodb
 mongoose
   .connect(process.env.MONGO_URI, {
